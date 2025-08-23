@@ -50,41 +50,27 @@
 // module.exports = pool;
 
 
-const { Pool } = require('pg');
+const { Client } = require('pg');
 require('dotenv').config({ path: './config.env' });
 
-// Build connection options (always use granular env vars)
-const poolConfig = {
-  // host: process.env.DB_HOST,
-  // port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
-  // database: process.env.DB_NAME,
-  // user: process.env.DB_USER,
-  // password: process.env.DB_PASSWORD, // ✅ Always include password
-  // max: 20,
-  // idleTimeoutMillis: 30000,
-  // connectionTimeoutMillis: 5000,
-  // keepAlive: true,
-  // ssl: { rejectUnauthorized: false }, // ✅ Required for Supabase/Render
-  // family: 4, // ✅ force IPv4 to avoid ENETUNREACH on IPv6
-
-  user: "postgres.lhbssujjbvlzcjyqdct",
-  password: "MAnoj123@",
-  database: "postgres",
-  port: 5432,
-  host: "aws-0-ap-southeast-1.pooler.supabase.com",
+const client = new Client({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
+  host: process.env.DB_HOST, // e.g. aws-0-ap-southeast-1.pooler.supabase.com
   ssl: { rejectUnauthorized: false },
-};
-
-const pool = new Pool(poolConfig);
-
-// Test the connection
-pool.on('connect', () => {
-  console.log('✅ Connected to PostgreSQL database');
+  keepAlive: true,
+  family: 4, // ✅ force IPv4 only
 });
 
-pool.on('error', (err) => {
-  console.error('❌ Unexpected error on idle client', err);
-  process.exit(-1);
-});
+client.connect()
+  .then(() => {
+    console.log("✅ Connected to PostgreSQL over IPv4");
+  })
+  .catch((error) => {
+    console.error("❌ Database connection error:", error);
+    process.exit(1);
+  });
 
-module.exports = pool;
+module.exports = client;
