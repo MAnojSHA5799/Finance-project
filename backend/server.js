@@ -51,6 +51,10 @@ app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
+  
+app.get("/", (req, res) => {
+  res.send("🚀 API is running...");
+});
 
 // Health check endpoint
 app.get('/health', (req, res) => {
