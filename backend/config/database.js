@@ -50,27 +50,20 @@
 // module.exports = pool;
 
 
-const { Client } = require('pg');
-require('dotenv').config({ path: './config.env' });
+const { Pool } = require('pg');
+require('dotenv').config();
 
-const client = new Client({
+const pool = new Pool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
-  host: process.env.DB_HOST, // e.g. aws-0-ap-southeast-1.pooler.supabase.com
   ssl: { rejectUnauthorized: false },
-  keepAlive: true,
-  family: 4, // ✅ force IPv4 only
+  family: 4,         // ✅ force IPv4
+  keepAlive: true,   // ✅ maintain connection
 });
 
-client.connect()
-  .then(() => {
-    console.log("✅ Connected to PostgreSQL over IPv4");
-  })
-  .catch((error) => {
-    console.error("❌ Database connection error:", error);
-    process.exit(1);
-  });
-
-module.exports = client;
+pool.connect()
+  .then(() => console.log("✅ Connected to Supabase PostgreSQL over IPv4"))
+  .catch(err => console.error("❌ Database connection error:", err.message));
