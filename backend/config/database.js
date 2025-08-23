@@ -8,12 +8,14 @@ let poolConfig;
   // Build connection options allowing password-less local auth when DB_PASSWORD is empty
   poolConfig = {
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined,
+    port: process.env.DB_PORT,
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    password: process.env.DB_PASSWORD,
+    ssl: { rejectUnauthorized: false },
+    family: 4,        // ✅ force IPv4 only
+    keepAlive: true,
+    connectionTimeoutMillis: 5000,
   };
 
   if (process.env.DB_PASSWORD && process.env.DB_PASSWORD.trim() !== '') {
