@@ -18,6 +18,9 @@ const redisClient = require('./config/redis');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ✅ Trust Render’s proxy so req.ip and express-rate-limit work properly
+app.set("trust proxy", 1);
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: {
