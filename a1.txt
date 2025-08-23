@@ -1,0 +1,5 @@
+Email: admin@financetracker.com
+Password: admin123
+
+Email: readonly@financetracker.com
+Password: readonly123
