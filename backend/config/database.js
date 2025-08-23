@@ -56,25 +56,17 @@ require('dotenv').config({ path: './config.env' });
 // Build connection options (always use granular env vars)
 const poolConfig = {
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined,
+  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, // ✅ Always include password
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 5000,
   keepAlive: true,
+  ssl: { rejectUnauthorized: false }, // ✅ Required for Supabase/Render
   family: 4, // ✅ force IPv4 to avoid ENETUNREACH on IPv6
 };
-
-// Add password if provided
-// if (process.env.DB_PASSWORD && process.env.DB_PASSWORD.trim() !== '') {
-//   poolConfig.password = process.env.DB_PASSWORD;
-// }
-
-// // Enable SSL for Supabase / managed Postgres
-// if ((process.env.DB_SSL || '').toLowerCase() === 'true') {
-//   poolConfig.ssl = { rejectUnauthorized: false };
-// }
 
 const pool = new Pool(poolConfig);
 
