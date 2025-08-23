@@ -78,7 +78,7 @@ class UserController {
       }
 
       const { email, password } = req.body;
-
+console.log("81",email,password)
       // Find user by email
       const user = await pool.query(
         'SELECT id, username, email, password_hash, first_name, last_name, role FROM users WHERE email = $1',
@@ -93,6 +93,7 @@ class UserController {
       }
 
       const userData = user.rows[0];
+      console.log("81",userData)
 
       // Check password
       const isValidPassword = await bcrypt.compare(password, userData.password_hash);
@@ -102,6 +103,7 @@ class UserController {
           message: 'Invalid credentials'
         });
       }
+      console.log("81",isValidPassword)
 
       // Update last_login if column exists
       try {
@@ -109,6 +111,7 @@ class UserController {
       } catch (e) {
         // Column might not exist; ignore
       }
+      console.log("81",isValidPassword)
 
       // Generate JWT token
       const token = jwt.sign(
@@ -116,6 +119,7 @@ class UserController {
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRES_IN }
       );
+      console.log("81",token)
 
       // Remove password from response
       delete userData.password_hash;
