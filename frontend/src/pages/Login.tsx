@@ -140,11 +140,11 @@ const Login: React.FC = () => {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Demo accounts:
             </p>
-            <div className="mt-2 space-y-1 text-xs text-gray-500 dark:text-gray-500">
+            {/* <div className="mt-2 space-y-1 text-xs text-gray-500 dark:text-gray-500">
               <p>Admin: admin@demo.com / admin123</p>
               <p>User: user@demo.com / user123</p>
               <p>Read-only: readonly@demo.com / readonly123</p>
-            </div>
+            </div> */}
           </div>
         </form>
       </div>
