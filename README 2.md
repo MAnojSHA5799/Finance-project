@@ -2,11 +2,7 @@
 
 A comprehensive full-stack personal finance management application with role-based access control, real-time analytics, and beautiful responsive UI.
 
-![Finance Tracker](https://img.shields.io/badge/Finance-Tracker-blue)
-![React](https://img.shields.io/badge/React-18+-61dafb)
-![Node.js](https://img.shields.io/badge/Node.js-16+-339933)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-336791)
-![Redis](https://img.shields.io/badge/Redis-6+-dc382d)
+
 
 ## 🚀 Features
 
@@ -177,12 +173,11 @@ The application will be available at:
 ## 👥 Demo Accounts
 
 For testing purposes, you can use these demo accounts:
-
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@demo.com | admin123 |
+| Admin | admin@financetracker.com | admin123 |
 | User | user@demo.com | user123 |
-| Read-only | readonly@demo.com | readonly123 |
+| Read-only | readonly@financetracker.com | readonly123 |
 
 ## 📁 Project Structure
 
