@@ -176,7 +176,6 @@ For testing purposes, you can use these demo accounts:
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@financetracker.com | admin123 |
-| User | user@demo.com | user123 |
 | Read-only | readonly@financetracker.com | readonly123 |
 
 ## 📁 Project Structure
